@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Class-based dark mode for next-themes */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Design tokens ─────────────────────────────────────────── */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -10,17 +14,162 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Brand — purple */
+  --color-brand-50:  #f3f0ff;
+  --color-brand-100: #ede9fe;
+  --color-brand-200: #ddd6fe;
+  --color-brand-300: #c4b5fd;
+  --color-brand-400: #a78bfa;
+  --color-brand-500: #8b5cf6;
+  --color-brand-600: #7c3aed;
+  --color-brand-700: #6d28d9;
+  --color-brand-800: #5b21b6;
+  --color-brand-900: #4c1d95;
+
+  /* Accent — indigo */
+  --color-accent-400: #818cf8;
+  --color-accent-500: #6366f1;
+  --color-accent-600: #4f46e5;
+  --color-accent-700: #4338ca;
+
+  /* Ink — neutral slate */
+  --color-ink-50:  #f8f9fc;
+  --color-ink-100: #f0f2f7;
+  --color-ink-200: #e1e5ef;
+  --color-ink-300: #c4cad9;
+  --color-ink-400: #9aa3ba;
+  --color-ink-500: #717b96;
+  --color-ink-600: #515d7a;
+  --color-ink-700: #3e4a64;
+  --color-ink-800: #2a3349;
+  --color-ink-900: #1a2235;
+  --color-ink-950: #0d111e;
+
+  /* Shadows — generate shadow-soft / shadow-soft-lg / shadow-glass utilities */
+  --shadow-soft: 0 6px 24px -6px rgba(16, 24, 40, 0.12);
+  --shadow-soft-lg: 0 20px 48px -12px rgba(16, 24, 40, 0.22);
+  --shadow-glass: 0 8px 32px rgba(16, 24, 40, 0.10);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dark theme driven by next-themes `.dark` class (not system preference) */
+.dark {
+  --background: #0d111e;
+  --foreground: #ededed;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Base ──────────────────────────────────────────────────── */
+/* Background + text color are handled by Tailwind classes on <body>
+   in layout.js (bg-white dark:bg-ink-950) so the theme toggle works. */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Keyframes ─────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* Infinite logo marquee (track is duplicated, so -50% loops seamlessly) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+/* Pulsing ring behind the WhatsApp button */
+@keyframes pulse-ring {
+  0%        { transform: scale(0.9); opacity: 0.7; }
+  70%, 100% { transform: scale(1.7); opacity: 0; }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ── Layout utilities ──────────────────────────────────────── */
+.container-x {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+/* ── Component utilities ───────────────────────────────────── */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:brightness-110 active:scale-95;
+  background: linear-gradient(135deg, #7c4dff 0%, #6a32f5 55%, #3b82f6 100%);
+  box-shadow: 0 8px 24px rgba(124, 77, 255, 0.28);
+}
+.btn-primary:hover {
+  box-shadow: 0 12px 32px rgba(124, 77, 255, 0.38);
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink-200 bg-white/60 px-6 py-3 text-sm font-semibold text-ink-800 backdrop-blur transition-all duration-300 hover:border-brand-300 hover:text-brand-700 dark:border-white/15 dark:bg-white/5 dark:text-ink-100 dark:hover:border-brand-400/60 dark:hover:text-white;
+}
+
+.bg-brand-gradient {
+  background: linear-gradient(135deg, #7c4dff 0%, #6a32f5 55%, #3b82f6 100%);
+}
+
+/* ── Hero utilities ────────────────────────────────────────── */
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #7c4dff 0%, #6a32f5 55%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Readable frosted card — solid enough to read over the 3D scene */
+.glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(124, 77, 255, 0.12);
+  box-shadow:
+    0 4px 6px rgba(16, 24, 40, 0.04),
+    0 12px 28px rgba(16, 24, 40, 0.10);
+}
+
+.dark .glass-card {
+  background: rgba(20, 22, 40, 0.7);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Subtle grid background */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(107, 76, 230, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(107, 76, 230, 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.dark .bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+/* Radial brand glow */
+.bg-brand-radial {
+  background: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    rgba(139, 92, 246, 0.15),
+    transparent
+  );
+}
+
+.dark .bg-brand-radial {
+  background: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    rgba(139, 92, 246, 0.18),
+    transparent
+  );
 }
