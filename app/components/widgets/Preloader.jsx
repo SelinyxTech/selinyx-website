@@ -104,23 +104,21 @@ export default function Preloader() {
           <div className="pointer-events-none absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-500/15 blur-3xl" />
 
           <div className="relative flex flex-col items-center">
-            {/* logo with a pulsing ring */}
+            {/* logo with a soft pulsing glow — no solid box behind the mark */}
             <div className="relative grid h-20 w-20 place-items-center">
               <motion.span
-                className="absolute inset-0 rounded-2xl bg-brand-gradient opacity-30 blur-md"
-                animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
+                className="absolute inset-0 rounded-full bg-brand-500/30 blur-2xl"
+                animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.55, 0.3] }}
                 transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
               />
-              <div className="relative grid h-16 w-16 place-items-center overflow-hidden rounded-2xl bg-brand-gradient">
-                <Image
-                  src="/logo.png"
-                  alt="Selinyx"
-                  width={44}
-                  height={44}
-                  priority
-                  className="h-11 w-11 object-contain"
-                />
-              </div>
+              <Image
+                src="/logo.png"
+                alt="Selinyx"
+                width={64}
+                height={64}
+                priority
+                className="relative h-16 w-16 object-contain"
+              />
             </div>
 
             <p className="mt-6 text-lg font-bold tracking-tight text-ink-900 dark:text-white">
