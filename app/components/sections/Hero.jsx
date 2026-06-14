@@ -110,7 +110,7 @@ export default function Hero() {
 
           <motion.h1
             variants={fadeUp}
-            className="mt-6 text-4xl font-bold leading-[1.08] tracking-tight text-ink-900 dark:text-white sm:text-5xl lg:text-6xl"
+            className="mt-6 text-4xl font-bold leading-[1.08] tracking-tight text-ink-900 dark:text-white sm:text-5xl 2xl:text-6xl"
           >
             We Build Digital Solutions That Drive{" "}
             <span className="text-gradient">Real Growth</span>
