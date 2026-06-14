@@ -76,7 +76,7 @@ export default function Experience({ darkMode = true, revealed = false, cards = 
   // Position + rotation + scale per screen tier.
   const config = {
     desktop: { pos: [3,   -1,   -2  ], rot: [0, -0.362, 0], scale: 1.0 },
-    laptop:  { pos: [2.2, -1,   -2  ], rot: [0, -0.362, 0], scale: 0.8 },
+    laptop:  { pos: [2.6, -1, -2], rot: [0, -0.362, 0], scale: 0.8 },
     tablet:  { pos: [0,   -0.9, -1.5], rot: [0,  0,     0], scale: 0.7 },
     mobile:  { pos: [0,   -0.8, -1.5], rot: [0,  0,     0], scale: 0.6 },
   };
