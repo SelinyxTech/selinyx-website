@@ -20,16 +20,7 @@ const Canvas = dynamic(
 
 const cameraSetting = { fov: 45, near: 0.1, far: 200, position: [0, 0.5, 7] };
 
-// Cards positioned (viewport %) to FRAME the 3D S-shape — desktop only.
-const cardPositions = [
-  "top-[20%] left-[53%]",
-  "top-[20%] right-[13%]",
-  "bottom-[30%] left-[53%]",
-  "bottom-[30%] right-[13%]",
-];
-
-// Wide screens = >= 1280px (xl). The 3D + floating cards are tuned for large
-// monitors, so we only mount them here; smaller laptops get the clean text hero.
+// Wide screens = >= 1280px (xl). Below this we show the clean text hero only.
 function useIsWide() {
   const [isWide, setIsWide] = useState(false);
   useEffect(() => {
@@ -48,28 +39,23 @@ export default function Hero() {
   const isWide = useIsWide();
   useEffect(() => setMounted(true), []);
 
-  // Report the real 3D asset loading progress to the global Preloader
   const { progress, active } = useProgress();
   useEffect(() => {
     loadStore.setProgress(progress, active);
   }, [progress, active]);
   useEffect(() => {
-    // Only ask the preloader to wait for the 3D when it actually renders (wide screens)
     loadStore.setHas3D(isWide);
   }, [isWide]);
 
-  // Wait for the Preloader to finish before playing entrance animations,
-  // otherwise they play hidden behind the loader and the user never sees them.
   const [revealed, setRevealed] = useState(loadStore.getState().revealed);
   useEffect(() => loadStore.subscribe((s) => setRevealed(s.revealed)), []);
 
-  // Until mounted, assume the default (dark) theme to avoid a flash
   const darkMode = mounted ? resolvedTheme === "dark" : true;
 
   return (
     <section className="relative overflow-hidden xl:min-h-screen">
 
-      {/* ── Background effects (behind everything) ───────────── */}
+      {/* ── Background effects ───────────── */}
       <div
         className="absolute inset-0 -z-20 bg-grid"
         style={{ maskImage: "radial-gradient(80% 60% at 50% 0%, black, transparent)" }}
@@ -78,7 +64,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute -left-40 top-20 -z-20 h-72 w-72 rounded-full bg-brand-500/20 blur-3xl sm:h-96 sm:w-96" />
       <div className="pointer-events-none absolute right-0 top-40 -z-20 h-72 w-72 rounded-full bg-accent-500/20 blur-3xl sm:h-96 sm:w-96" />
 
-      {/* ── Full-screen 3D canvas — WIDE SCREENS ONLY ────────── */}
+      {/* ── Full-screen 3D canvas — WIDE SCREENS ONLY ── */}
       {isWide && (
         <div className="absolute inset-0 -z-10">
           <Canvas
@@ -93,14 +79,19 @@ export default function Hero() {
             style={{ background: "transparent" }}
           >
             <Suspense fallback={null}>
-              <Experience darkMode={darkMode} />
+              {/* cards now live INSIDE the scene → they always frame the S */}
+              <Experience
+                darkMode={darkMode}
+                revealed={revealed}
+                cards={heroCards.slice(0, 4)}
+              />
             </Suspense>
           </Canvas>
           <Loader />
         </div>
       )}
 
-      {/* ── Content (block on mobile, left column on desktop) ── */}
+      {/* ── Text content (left column) ── */}
       <div className="container-x relative z-10 flex flex-col justify-center pt-28 pb-16 md:pt-36 xl:min-h-screen xl:pt-0 xl:pb-24">
         <motion.div
           variants={staggerContainer}
@@ -162,42 +153,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* ── WIDE SCREENS: floating cards overlay framing the 3D ── */}
-      {isWide && (
-        <div className="pointer-events-none absolute inset-0 z-10 hidden xl:block">
-          {heroCards.slice(0, 4).map((card, i) => (
-            <motion.div
-              key={card.title}
-              initial={{ opacity: 0, y: 24, scale: 0.9 }}
-              animate={revealed ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 24, scale: 0.9 }}
-              transition={{ delay: 0.5 + i * 0.12, duration: 0.5 }}
-              className={`pointer-events-auto absolute ${cardPositions[i]} w-52`}
-            >
-              <div
-                className="animate-float glass-card rounded-2xl px-4 py-3.5"
-                style={{ animationDelay: `${i * 0.7}s` }}
-              >
-                <div className="flex items-center gap-3">
-                  <span
-                    className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${card.accent} text-white shadow-sm`}
-                  >
-                    <card.icon className="h-5 w-5" strokeWidth={2} />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold leading-tight text-ink-900 dark:text-white">
-                      {card.title}
-                    </p>
-                    <p className="mt-0.5 truncate text-xs text-ink-500 dark:text-ink-400">
-                      {card.subtitle}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      )}
 
     </section>
   );

@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useEffect, useRef } from "react";
 import { useThree, useFrame } from "@react-three/fiber";
+import { Html } from "@react-three/drei";
 import * as THREE from "three";
 
 import Podium from "./Podium";
@@ -10,22 +11,26 @@ import SShape from "./SShape";
 import Dots from "./Dots";
 import Lights from "./Lights";
 
-// detects desktop (>=1024px), updates on resize
-function useIsDesktop() {
-  const [isDesktop, setIsDesktop] = useState(true);
+// Detects screen tier: mobile / tablet / laptop / desktop. Updates on resize.
+function useScreenTier() {
+  const [tier, setTier] = useState("desktop");
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
-    const update = () => setIsDesktop(mq.matches);
+    const getTier = () => {
+      const w = window.innerWidth;
+      if (w < 768) return "mobile";
+      if (w < 1024) return "tablet";
+      if (w < 1440) return "laptop";
+      return "desktop";
+    };
+    const update = () => setTier(getTier());
     update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
-  return isDesktop;
+  return tier;
 }
 
-// smooth mouse parallax (desktop only)
-// Tracks the mouse on `window` instead of the canvas — the canvas sits behind
-// the page content, so it never receives its own pointer events.
+// Smooth mouse parallax (desktop + laptop only).
 function Parallax({ enabled = true }) {
   const { camera } = useThree();
   const baseX = useRef(camera.position.x);
@@ -54,14 +59,30 @@ function Parallax({ enabled = true }) {
   return null;
 }
 
-export default function Experience({ darkMode = true }) {
-  const isDesktop = useIsDesktop();
+// 3D anchor points where each card floats around the S (local space).
+// Order = your cards array: [AI, Software, Cloud, UI/UX]
+// NOTE: tune these 4 points by eye to frame your S nicely.
+const cardAnchors = [
+  [-2,  2.5, 0], // top-left     (AI Solutions)
+  [ 2,  2.5, 0], // top-right    (Software Development)  ← pulled left
+  [-2, -0.1, 0], // bottom-left  (Cloud Engineering)
+  [ 2, -0.1, 0], // bottom-right (UI/UX Design)          ← pulled left
+];
 
-  // Positioned to the right side for the full-screen canvas (left side stays clear for text)
-  const groupPos = isDesktop ? [3, -1, -2] : [0, -0.8, -1.5];
-  const groupRot = isDesktop ? [0, -0.362, 0] : [0, 0, 0];
+export default function Experience({ darkMode = true, revealed = false, cards = [] }) {
+  const tier = useScreenTier();
+  const isBigScreen = tier === "laptop" || tier === "desktop";
 
-  // floor changes with theme
+  // Position + rotation + scale per screen tier.
+  const config = {
+    desktop: { pos: [3,   -1,   -2  ], rot: [0, -0.362, 0], scale: 1.0 },
+    laptop:  { pos: [2.2, -1,   -2  ], rot: [0, -0.362, 0], scale: 0.8 },
+    tablet:  { pos: [0,   -0.9, -1.5], rot: [0,  0,     0], scale: 0.7 },
+    mobile:  { pos: [0,   -0.8, -1.5], rot: [0,  0,     0], scale: 0.6 },
+  };
+  const { pos: groupPos, rot: groupRot, scale: groupScale } = config[tier];
+
+  // Floor texture changes with theme.
   const floorTexture = useMemo(() => {
     const size = 512;
     const canvas = document.createElement("canvas");
@@ -87,28 +108,70 @@ export default function Experience({ darkMode = true }) {
 
   return (
     <>
-      {/* Transparent canvas — the page background (grid + glow) shows through */}
-      <Parallax enabled={isDesktop} />
+      <Parallax enabled={isBigScreen} />
 
-      <group position={groupPos} rotation={groupRot}>
+      {/* 3D scene (rotated) */}
+      <group position={groupPos} rotation={groupRot} scale={groupScale}>
         <Dots />
         <Lights />
-
-        {/* company logo */}
         <SShape />
-
-        {/* podium (theme-aware) */}
         <Podium darkMode={darkMode} />
-
-        {/* ripple rings */}
         <Rings />
-
-        {/* floor */}
         <mesh rotation-x={-Math.PI * 0.5} position-y={-1}>
           <circleGeometry args={[5, 64]} />
           <meshBasicMaterial map={floorTexture} transparent toneMapped={false} />
         </mesh>
       </group>
+
+      {/* Floating cards — SAME position + scale as the S, NO rotation.
+          They auto-track the S at EVERY screen size and stay readable. */}
+      {isBigScreen && cards.length > 0 && (
+        <group position={groupPos} scale={groupScale}>
+          {cards.map((card, i) => {
+            const Icon = card.icon;
+            return (
+              <Html
+                key={card.title}
+                position={cardAnchors[i]}
+                center
+                zIndexRange={[20, 0]}
+              >
+                <div
+                  className="w-52"
+                  style={{
+                    opacity: revealed ? 1 : 0,
+                    transform: `translateY(${revealed ? "0px" : "24px"}) scale(${revealed ? groupScale : groupScale * 0.9})`,
+                    transition: "opacity .5s ease, transform .5s ease",
+                    transitionDelay: `${0.5 + i * 0.12}s`,
+                    transformOrigin: "center center",
+                  }}
+                >
+                  <div
+                    className="animate-float glass-card rounded-2xl px-4 py-3.5"
+                    style={{ animationDelay: `${i * 0.7}s` }}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span
+                        className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${card.accent} text-white shadow-sm`}
+                      >
+                        <Icon className="h-5 w-5" strokeWidth={2} />
+                      </span>
+                      <div className="min-w-0">
+                        <p className="text-sm font-semibold leading-tight text-ink-900 dark:text-white">
+                          {card.title}
+                        </p>
+                        <p className="mt-0.5 truncate text-xs text-ink-500 dark:text-ink-400">
+                          {card.subtitle}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Html>
+            );
+          })}
+        </group>
+      )}
     </>
   );
 }
