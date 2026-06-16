@@ -1,10 +1,10 @@
-import { Target, Compass, Quote } from "lucide-react";
+import { Target, Compass } from "lucide-react";
 import { PageHeader } from "@/app/components/sections/PageHeader";
 import { SectionHeading } from "@/app/components/ui/SectionHeading";
 import { Reveal } from "@/app/components/ui/Reveal";
 import { Stats } from "@/app/components/sections/Stats";
 import { CTASection } from "@/app/components/sections/CTASection";
-import { coreValues, whyChoose, company } from "@/app/lib/data";
+import { coreValues, whyChoose } from "@/app/lib/data";
 
 export const metadata = {
   title: "About Us",
@@ -27,7 +27,7 @@ export default function AboutPage() {
       />
 
       {/* Vision & Mission */}
-      <section className="py-12 md:py-20">
+      <section className="py-20 md:py-28">
         <div className="container-x grid gap-6 md:grid-cols-2">
           <Reveal>
             <div className="h-full rounded-3xl border border-ink-200/60 bg-white p-8 dark:border-white/10 dark:bg-white/[0.03]">
@@ -60,7 +60,7 @@ export default function AboutPage() {
       </section>
 
       {/* Why choose Selinyx */}
-      <section className="py-12 md:py-20">
+      <section className="py-20 md:py-28">
         <div className="container-x">
           <SectionHeading
             eyebrow="Why Selinyx"
@@ -88,7 +88,7 @@ export default function AboutPage() {
       <Stats />
 
       {/* Core values */}
-      <section className="py-12 md:py-20">
+      <section className="py-20 md:py-28">
         <div className="container-x">
           <SectionHeading
             eyebrow="Core Values"
@@ -112,38 +112,6 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Founder */}
-      <section className="py-12 md:py-20">
-        <div className="container-x">
-          <Reveal>
-            <div className="relative overflow-hidden rounded-3xl border border-ink-200/60 bg-white p-8 dark:border-white/10 dark:bg-white/[0.03] sm:p-12">
-              <div className="pointer-events-none absolute -right-12 -top-12 h-48 w-48 rounded-full bg-brand-500/10 blur-3xl" />
-              <div className="relative grid items-center gap-8 md:grid-cols-[auto_1fr]">
-                <div className="mx-auto">
-                  <div className="grid h-32 w-32 place-items-center rounded-3xl bg-brand-gradient text-4xl font-bold text-white shadow-soft-lg">
-                    AS
-                  </div>
-                </div>
-                <div>
-                  <Quote className="h-8 w-8 text-brand-300 dark:text-brand-500/50" />
-                  <p className="mt-3 text-lg leading-relaxed text-ink-700 dark:text-ink-100">
-                    &ldquo;We started Selinyx because too many great ideas die in translation
-                    between business and engineering. Our job is to close that gap — to be the
-                    technical partner that makes your vision real, fast, and built to last.&rdquo;
-                  </p>
-                  <div className="mt-5">
-                    <p className="font-semibold text-ink-900 dark:text-white">Alex Soundara</p>
-                    <p className="text-sm text-ink-500 dark:text-ink-400">
-                      Founder &amp; CEO, {company.name}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Reveal>
         </div>
       </section>
 

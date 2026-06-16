@@ -22,11 +22,11 @@ export default function ServicesPage() {
             <span className="text-gradient">build, launch &amp; scale</span>
           </>
         }
-        description="Nine end-to-end capabilities under one roof. Mix and match what you need — or let us own the whole journey from idea to growth."
+        description="End-to-end capabilities under one roof. Mix and match what you need — or let us own the whole journey from idea to growth."
       />
 
-      <section className="pb-12 md:pb-20">
-        <div className="container-x grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="pb-20 md:pb-28">
+        <div className="container-x grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (
             <div key={service.slug} id={service.slug} className="scroll-mt-28 h-full">
               <Reveal delay={(i % 3) * 0.08} className="h-full">

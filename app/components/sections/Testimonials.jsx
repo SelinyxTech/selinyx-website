@@ -7,9 +7,9 @@ import { testimonials } from "@/app/lib/data";
 import { SectionHeading } from "@/app/components/ui/SectionHeading";
 
 export function Testimonials() {
+  const count = testimonials.length;
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const count = testimonials.length;
 
   const go = useCallback(
     (dir) => setIndex((i) => (i + dir + count) % count),
@@ -17,11 +17,12 @@ export function Testimonials() {
   );
 
   useEffect(() => {
-    if (paused) return;
+    if (paused || count === 0) return;
     const id = setInterval(() => setIndex((i) => (i + 1) % count), 5500);
     return () => clearInterval(id);
   }, [paused, count]);
 
+  if (count === 0) return null;
   const t = testimonials[index];
 
   return (

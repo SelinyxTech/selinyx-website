@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, CheckCircle2 } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { services } from "@/app/lib/data";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -18,9 +20,26 @@ export function ContactForm() {
   const update = (key) => (e) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError("");
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data?.error || "Something went wrong. Please try again.");
+      }
+      setSubmitted(true);
+    } catch (err) {
+      setError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputClass =
@@ -46,6 +65,7 @@ export function ContactForm() {
           type="button"
           onClick={() => {
             setSubmitted(false);
+            setError("");
             setForm({ name: "", email: "", company: "", service: "", message: "" });
           }}
           className="btn-ghost mt-6"
@@ -132,8 +152,22 @@ export function ContactForm() {
         />
       </div>
 
-      <button type="submit" className="btn-primary mt-6 w-full sm:w-auto">
-        Send message
+      {error && (
+        <p
+          role="alert"
+          className="mt-5 flex items-start gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-200"
+        >
+          <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
+          {error}
+        </p>
+      )}
+
+      <button
+        type="submit"
+        disabled={submitting}
+        className="btn-primary mt-6 w-full sm:w-auto disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        {submitting ? "Sending…" : "Send message"}
         <Send className="h-4 w-4" />
       </button>
     </form>

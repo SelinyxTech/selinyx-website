@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { company } from "@/app/lib/data";
 
 export function WhatsAppButton() {
+  if (!company.whatsapp) return null;
   const href = `https://wa.me/${company.whatsapp}?text=${encodeURIComponent(
     "Hi Selinyx! I'd like to discuss a project."
   )}`;

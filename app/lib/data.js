@@ -127,47 +127,13 @@ export const services = [
   },
 ];
 
-export const stats = [
-  { value: 200, suffix: "+", label: "Projects Delivered" },
-  { value: 98, suffix: "%", label: "Client Satisfaction" },
-  { value: 50, suffix: "+", label: "Experts On Team" },
-  { value: 12, suffix: "+", label: "Countries Served" },
-];
+// TODO: replace with real numbers once we have them. Setting an empty array
+// hides the Stats section everywhere it is used.
+export const stats = [];
 
-export const testimonials = [
-  {
-    quote:
-      "Selinyx rebuilt our platform from the ground up and shipped in half the time we expected. The AI features they added drove a 40% lift in engagement.",
-    name: "Sarah Chen",
-    role: "VP of Product",
-    company: "Nova Retail",
-    initials: "SC",
-  },
-  {
-    quote:
-      "Their cloud team migrated us with zero downtime and cut our infrastructure bill by 35%. Truly a partner, not just a vendor.",
-    name: "Marcus Delgado",
-    role: "CTO",
-    company: "FinPeak",
-    initials: "MD",
-  },
-  {
-    quote:
-      "From discovery to launch, the process was transparent and fast. The dashboard they built is now the heart of our operations.",
-    name: "Aisha Rahman",
-    role: "Head of Operations",
-    company: "LogiFlow",
-    initials: "AR",
-  },
-  {
-    quote:
-      "We came with a rough idea and left with a market-ready SaaS product. Selinyx's design and engineering quality is best-in-class.",
-    name: "Tom Whitfield",
-    role: "Founder & CEO",
-    company: "Brightline",
-    initials: "TW",
-  },
-];
+// TODO: add real client testimonials with permission (name, role, company, quote).
+// Empty array hides the Testimonials section everywhere it is used.
+export const testimonials = [];
 
 export const faqs = [
   {
@@ -202,76 +168,58 @@ export const faqs = [
   },
 ];
 
+// "Solutions we build" — generalized capability examples used until we can
+// publish real case studies with client permission and verified metrics.
 export const projects = [
   {
     slug: "ai-chatbot-platform",
-    title: "AI Chatbot Platform",
+    title: "AI Chatbot Platforms",
     category: "AI & Machine Learning",
     description:
-      "A multi-tenant conversational AI platform with retrieval-augmented generation, letting support teams deploy branded assistants in minutes.",
-    tags: ["OpenAI", "Next.js", "Pinecone", "Python"],
+      "Multi-tenant conversational AI with retrieval-augmented generation, so support teams can deploy branded assistants trained on their own knowledge base.",
+    tags: ["OpenAI", "Next.js", "Vector DB", "Python"],
     icon: Bot,
     accent: "from-brand-500 to-accent-500",
-    metrics: [
-      { label: "Resolution rate", value: "+62%" },
-      { label: "Response time", value: "-80%" },
-    ],
   },
   {
     slug: "analytics-dashboard",
-    title: "Analytics Dashboard",
+    title: "Analytics Dashboards",
     category: "Data Engineering",
     description:
-      "A real-time analytics suite unifying data from a dozen sources into a single, lightning-fast dashboard with predictive insights.",
+      "Real-time analytics suites that unify data from many sources into a single, lightning-fast dashboard with predictive insights and alerting.",
     tags: ["React", "ClickHouse", "AWS", "D3"],
     icon: LayoutDashboard,
     accent: "from-accent-500 to-brand-500",
-    metrics: [
-      { label: "Query speed", value: "12x" },
-      { label: "Data sources", value: "14" },
-    ],
   },
   {
     slug: "saas-product",
-    title: "SaaS Product",
+    title: "SaaS Products",
     category: "Custom Software",
     description:
-      "An end-to-end SaaS platform with subscription billing, role-based access, and a polished onboarding flow — built from idea to launch.",
+      "End-to-end SaaS platforms with subscription billing, role-based access, and a polished onboarding flow — built from idea to launch.",
     tags: ["Next.js", "Stripe", "PostgreSQL", "TypeScript"],
     icon: Rocket,
     accent: "from-brand-400 to-brand-600",
-    metrics: [
-      { label: "Time to market", value: "10 wks" },
-      { label: "Uptime", value: "99.98%" },
-    ],
   },
   {
     slug: "ecommerce-platform",
-    title: "E-commerce Platform",
+    title: "E-commerce Platforms",
     category: "Web Development",
     description:
-      "A headless commerce experience with blazing performance, personalized recommendations, and a seamless mobile checkout.",
+      "Headless commerce experiences with strong performance, personalized recommendations, and a seamless mobile checkout.",
     tags: ["Next.js", "Shopify", "Algolia", "Vercel"],
     icon: ShoppingCart,
     accent: "from-accent-400 to-accent-600",
-    metrics: [
-      { label: "Conversion", value: "+38%" },
-      { label: "Page load", value: "0.9s" },
-    ],
   },
   {
     slug: "enterprise-automation",
     title: "Enterprise Automation",
     category: "Automation",
     description:
-      "An intelligent workflow engine that automated invoice processing and approvals across five departments for a global manufacturer.",
+      "Intelligent workflow engines that automate document processing, approvals, and cross-system orchestration across departments.",
     tags: ["Python", "Azure", "RPA", "Kubernetes"],
     icon: Factory,
     accent: "from-brand-600 to-accent-500",
-    metrics: [
-      { label: "Hours saved/mo", value: "1,200" },
-      { label: "Error rate", value: "-95%" },
-    ],
   },
 ];
 
@@ -372,15 +320,15 @@ export const pricingTiers = [
 export const company = {
   name: "Selinyx",
   tagline: "We Build Digital Solutions That Drive Real Growth",
-  email: "contact@selinyx.com",
-  phone: "+1 (555) 010-2025",
-  whatsapp: "15550102025",
+  email: "selinyxtech@gmail.com",
+  phone: "+91 97156 65066",
+  whatsapp: "919715665066",
   address: "Remote-first · Serving clients worldwide",
   social: {
-    twitter: "https://twitter.com",
-    linkedin: "https://linkedin.com",
-    github: "https://github.com",
-    dribbble: "https://dribbble.com",
+    linkedin: "https://www.linkedin.com/in/selinyxtech/",
+    twitter: "https://x.com/SELINYX_",
+    github: "https://github.com/SelinyxTech",
+    instagram: "https://www.instagram.com/selinyx_tech/",
   },
 };
 

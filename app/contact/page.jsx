@@ -11,13 +11,13 @@ export const metadata = {
 };
 
 const infoCards = [
-  {
+  company.email && {
     icon: Mail,
     title: "Email us",
     value: company.email,
     href: `mailto:${company.email}`,
   },
-  {
+  company.whatsapp && {
     icon: MessageCircle,
     title: "WhatsApp",
     value: "Chat with our team",
@@ -28,12 +28,12 @@ const infoCards = [
     title: "Response time",
     value: "Within 1 business day",
   },
-  {
+  company.address && {
     icon: MapPin,
     title: "Where we are",
     value: company.address,
   },
-];
+].filter(Boolean);
 
 export default function ContactPage() {
   return (

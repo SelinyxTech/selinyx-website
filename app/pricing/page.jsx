@@ -28,7 +28,7 @@ export default function PricingPage() {
         description="Choose the engagement model that fits your stage. Every plan includes senior talent, transparent communication, and code you fully own."
       />
 
-      <section className="relative pb-12 md:pb-16">
+      <section className="relative pb-20 md:pb-28">
         {/* Soft decorative glow behind the cards */}
         <div
           aria-hidden="true"
@@ -43,7 +43,7 @@ export default function PricingPage() {
                 <div
                   className={`group relative flex h-full flex-col rounded-3xl border p-8 transition-all duration-300 ${
                     tier.highlighted
-                      ? "border-transparent bg-brand-gradient text-white shadow-[0_28px_80px_-22px_rgba(124,77,255,0.7)] lg:scale-[1.06] lg:hover:scale-[1.08]"
+                      ? "border-transparent bg-brand-gradient text-white shadow-[0_32px_90px_-22px_rgba(124,77,255,0.7)] ring-1 ring-white/30 lg:shadow-[0_40px_110px_-24px_rgba(124,77,255,0.85)]"
                       : "border-ink-200/70 bg-white hover:-translate-y-2 hover:border-brand-300 hover:shadow-[0_24px_60px_-28px_rgba(124,77,255,0.45)] dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-brand-400/40"
                   }`}
                 >
