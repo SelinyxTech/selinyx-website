@@ -94,12 +94,12 @@ export default function Hero() {
 
       {/* ── Text content (left column) ── */}
       {/* ── Text content ── */}
-      <div className="container-x relative z-10 flex flex-col justify-center pt-28 pb-16 md:pt-36 xl:min-h-screen xl:pt-0 xl:pb-24">
+      <div className="container-x relative z-10 flex flex-col justify-center pt-28 pb-16 md:pt-36 md:pb-20 xl:min-h-screen xl:pt-0 xl:pb-24">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate={revealed ? "show" : "hidden"}
-          className="w-full max-w-xl mx-auto text-center xl:mx-0 xl:text-left xl:-mt-12"
+          className="w-full max-w-xl mx-auto text-center md:max-w-2xl lg:max-w-xl xl:mx-0 xl:text-left xl:-mt-12"
         >
           <motion.div variants={fadeUp}>
             <span className="inline-flex items-center gap-2 rounded-full border border-brand-200/70 bg-white/70 px-4 py-1.5 text-xs font-semibold text-brand-700 backdrop-blur dark:border-brand-400/20 dark:bg-white/5 dark:text-brand-300">
@@ -110,7 +110,7 @@ export default function Hero() {
 
           <motion.h1
             variants={fadeUp}
-            className="mt-6 text-4xl font-bold leading-[1.08] tracking-tight text-ink-900 dark:text-white sm:text-5xl 2xl:text-6xl"
+            className="mt-6 text-[2rem] font-bold leading-[1.08] tracking-tight text-ink-900 dark:text-white sm:text-5xl md:text-[3.25rem] xl:text-5xl 2xl:text-6xl"
           >
             We Build Digital Solutions That Drive{" "}
             <span className="text-gradient">Real Growth</span>
@@ -143,7 +143,7 @@ export default function Hero() {
 
           <motion.div variants={fadeUp} className="mt-12">
             <p className="text-sm font-medium text-ink-400 dark:text-ink-400">
-              Trusted by 200+ businesses worldwide
+              Built with the technologies we trust
             </p>
             <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 xl:justify-start">
               {technologies.slice(0, 5).map((t) => (

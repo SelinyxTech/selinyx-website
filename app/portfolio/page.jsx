@@ -6,31 +6,32 @@ import { CTASection } from "@/app/components/sections/CTASection";
 import { projects } from "@/app/lib/data";
 
 export const metadata = {
-  title: "Portfolio",
+  title: "What We Build",
   description:
-    "Selected work from Selinyx — AI chatbot platforms, analytics dashboards, SaaS products, e-commerce platforms, and enterprise automation. Real projects, real results.",
+    "Examples of the kinds of products Selinyx designs and engineers — AI chatbot platforms, analytics dashboards, SaaS products, e-commerce, and enterprise automation. Detailed case studies coming soon.",
 };
 
 export default function PortfolioPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Portfolio"
+        eyebrow="What We Build"
         title={
           <>
-            Work that delivers <span className="text-gradient">real results</span>
+            Solutions we design, build &amp;{" "}
+            <span className="text-gradient">ship at scale</span>
           </>
         }
-        description="A look at products we've designed and engineered for startups and enterprises — and the measurable impact they created."
+        description="A look at the kinds of products our team designs and engineers. Detailed case studies coming soon — until then, see what we can build for you."
       />
 
-      <section className="pb-12 md:pb-20">
-        <div className="container-x grid gap-6 lg:grid-cols-2">
+      <section className="pb-20 md:pb-28">
+        <div className="container-x grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, i) => (
-            <Reveal key={project.slug} delay={(i % 2) * 0.1} className="h-full">
-              <article className="group h-full overflow-hidden rounded-3xl border border-ink-200/60 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-soft dark:border-white/10 dark:bg-white/[0.03]">
+            <Reveal key={project.slug} delay={(i % 3) * 0.08} className="h-full">
+              <article className="group flex h-full flex-col overflow-hidden rounded-3xl border border-ink-200/60 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-soft dark:border-white/10 dark:bg-white/[0.03]">
                 {/* Preview */}
-                <div className={`relative h-52 overflow-hidden bg-gradient-to-br ${project.accent}`}>
+                <div className={`relative h-44 overflow-hidden bg-gradient-to-br ${project.accent}`}>
                   <div className="absolute inset-0 bg-grid opacity-20" />
                   <div className="absolute left-4 top-4 flex gap-1.5">
                     <span className="h-3 w-3 rounded-full bg-white/40" />
@@ -39,7 +40,7 @@ export default function PortfolioPage() {
                   </div>
                   <div className="absolute inset-0 grid place-items-center">
                     <project.icon
-                      className="h-20 w-20 text-white/90 transition-transform duration-500 group-hover:scale-110"
+                      className="h-16 w-16 text-white/90 transition-transform duration-500 group-hover:scale-110"
                       strokeWidth={1.3}
                     />
                   </div>
@@ -49,8 +50,8 @@ export default function PortfolioPage() {
                 </div>
 
                 {/* Body */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-ink-900 dark:text-white">{project.title}</h3>
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-lg font-bold text-ink-900 dark:text-white">{project.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-ink-500 dark:text-ink-300">
                     {project.description}
                   </p>
@@ -66,21 +67,14 @@ export default function PortfolioPage() {
                     ))}
                   </div>
 
-                  <div className="mt-6 flex items-center justify-between border-t border-ink-200/60 pt-5 dark:border-white/10">
-                    <div className="flex gap-8">
-                      {project.metrics.map((m) => (
-                        <div key={m.label}>
-                          <p className="text-xl font-bold text-gradient">{m.value}</p>
-                          <p className="text-xs text-ink-500 dark:text-ink-400">{m.label}</p>
-                        </div>
-                      ))}
-                    </div>
+                  <div className="mt-auto flex items-center justify-end pt-6">
                     <Link
                       href="/contact"
                       aria-label={`Discuss a project like ${project.title}`}
-                      className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-brand-50 text-brand-600 transition-colors hover:bg-brand-gradient hover:text-white dark:bg-white/5 dark:text-brand-300"
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600 transition-colors hover:text-brand-700 dark:text-brand-300"
                     >
-                      <ArrowUpRight className="h-5 w-5" />
+                      Discuss a project
+                      <ArrowUpRight className="h-4 w-4" />
                     </Link>
                   </div>
                 </div>

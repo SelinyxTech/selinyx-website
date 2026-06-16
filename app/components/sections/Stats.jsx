@@ -3,6 +3,7 @@ import { AnimatedCounter } from "@/app/components/ui/AnimatedCounter";
 import { Reveal } from "@/app/components/ui/Reveal";
 
 export function Stats() {
+  if (!stats.length) return null;
   return (
     <section className="py-12">
       <div className="container-x">

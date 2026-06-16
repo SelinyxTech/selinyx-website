@@ -9,6 +9,7 @@ import { WhatsAppButton } from "@/app/components/widgets/WhatsAppButton";
 import { ChatWidget } from "@/app/components/widgets/ChatWidget";
 import Preloader from "@/app/components/widgets/Preloader";
 import { OfflineIndicator } from "@/app/components/widgets/OfflineIndicator";
+import { company } from "@/app/lib/data";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -116,6 +117,19 @@ export const viewport = {
   ],
 };
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: company.name,
+  url: siteUrl,
+  logo: `${siteUrl}/logo.png`,
+  description:
+    "Selinyx is a technology company specializing in AI solutions, custom software, web and mobile apps, cloud services, and digital transformation.",
+  ...(company.email && { email: company.email }),
+  ...(company.phone && { telephone: company.phone }),
+  sameAs: Object.values(company.social).filter(Boolean),
+};
+
 export default function RootLayout({ children }) {
   return (
     <html
@@ -125,6 +139,10 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} bg-white dark:bg-ink-950`}
     >
       <body className="min-h-screen font-sans text-ink-900 antialiased dark:text-ink-50">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <Preloader />
           <OfflineIndicator />

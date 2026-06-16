@@ -3,7 +3,7 @@ import { technologies } from "@/app/lib/data";
 export function TrustedBy() {
   const items = [...technologies, ...technologies];
   return (
-    <section className="border-y border-ink-200/60 bg-ink-50/50 py-10 dark:border-white/10 dark:bg-white/[0.02]">
+    <section className="border-y border-ink-200/60 bg-ink-50/50 py-12 dark:border-white/10 dark:bg-white/[0.02]">
       <div className="container-x">
         <p className="text-center text-sm font-medium uppercase tracking-wider text-ink-400 dark:text-ink-500">
           Powered by the technologies we trust
