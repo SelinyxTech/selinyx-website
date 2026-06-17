@@ -99,7 +99,7 @@ export default function Hero() {
           variants={staggerContainer}
           initial="hidden"
           animate={revealed ? "show" : "hidden"}
-          className="w-full max-w-xl mx-auto text-center md:max-w-2xl lg:max-w-xl xl:mx-0 xl:text-left xl:-mt-12"
+          className="w-full max-w-xl mx-auto text-center md:max-w-2xl lg:max-w-xl xl:mx-0 xl:max-w-[44rem] 2xl:max-w-[48rem] xl:text-left xl:-mt-12"
         >
           <motion.div variants={fadeUp}>
             <span className="inline-flex items-center gap-2 rounded-full border border-brand-200/70 bg-white/70 px-4 py-1.5 text-xs font-semibold text-brand-700 backdrop-blur dark:border-brand-400/20 dark:bg-white/5 dark:text-brand-300">
@@ -110,10 +110,12 @@ export default function Hero() {
 
           <motion.h1
             variants={fadeUp}
-            className="mt-6 text-[2rem] font-bold leading-[1.08] tracking-tight text-ink-900 dark:text-white sm:text-5xl md:text-[3.25rem] xl:text-5xl 2xl:text-6xl"
+            className="mt-6 text-[2rem] font-bold leading-[1.08] tracking-tight text-ink-900 dark:text-white sm:text-5xl md:text-[3.25rem] xl:text-[2.75rem] xl:leading-[1.12] 2xl:text-[3.25rem]"
           >
-            We Build Digital Solutions That Drive{" "}
-            <span className="text-gradient">Real Growth</span>
+            <span className="xl:block">We Build Digital Solutions</span>{" "}
+            <span className="xl:block">
+              That Drive <span className="text-gradient">Real Growth</span>
+            </span>
           </motion.h1>
 
           <motion.p

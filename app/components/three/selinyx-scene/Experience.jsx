@@ -63,10 +63,10 @@ function Parallax({ enabled = true }) {
 // Order = your cards array: [AI, Software, Cloud, UI/UX]
 // NOTE: tune these 4 points by eye to frame your S nicely.
 const cardAnchors = [
-  [-2,  2.5, 0], // AI Solutions
-  [ 2,  2.5, 0], // Software Development
-  [-2, -0.1, 0], // Cloud Engineering
-  [ 2, -0.1, 0], // UI/UX Design
+  [-1.75,  2.5, 0], // AI Solutions  — lifted up & inward so it clears the heading text
+  [ 1.75,  2.5, 0], // Software Development
+  [-2,    -0.1, 0], // Cloud Engineering
+  [ 2,    -0.1, 0], // UI/UX Design
 ];
 
 export default function Experience({ darkMode = true, revealed = false, cards = [] }) {
@@ -137,7 +137,7 @@ export default function Experience({ darkMode = true, revealed = false, cards = 
                 zIndexRange={[20, 0]}
               >
                 <div
-                  className="w-52"
+                  className="w-56"
                   style={{
                     opacity: revealed ? 1 : 0,
                     transform: `translateY(${revealed ? "0px" : "24px"}) scale(${revealed ? groupScale : groupScale * 0.9})`,
@@ -147,20 +147,20 @@ export default function Experience({ darkMode = true, revealed = false, cards = 
                   }}
                 >
                   <div
-                    className="animate-float glass-card rounded-2xl px-4 py-3.5"
+                    className="animate-float glass-card rounded-2xl p-4"
                     style={{ animationDelay: `${i * 0.7}s` }}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3.5">
                       <span
-                        className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${card.accent} text-white shadow-sm`}
+                        className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br ${card.accent} text-white shadow-md`}
                       >
-                        <Icon className="h-5 w-5" strokeWidth={2} />
+                        <Icon className="h-[1.35rem] w-[1.35rem]" strokeWidth={2} />
                       </span>
                       <div className="min-w-0">
-                        <p className="text-sm font-semibold leading-tight text-ink-900 dark:text-white">
+                        <p className="text-sm font-semibold leading-snug text-ink-900 dark:text-white">
                           {card.title}
                         </p>
-                        <p className="mt-0.5 truncate text-xs text-ink-500 dark:text-ink-400">
+                        <p className="mt-1 text-xs font-medium leading-tight text-ink-500 dark:text-ink-400">
                           {card.subtitle}
                         </p>
                       </div>
