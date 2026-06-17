@@ -10,7 +10,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section id="faq" className="py-20 md:py-28">
+    <section id="faq" className="py-10 md:py-14 lg:py-16 2xl:py-20">
       <div className="container-x">
         <SectionHeading
           eyebrow="FAQ"
@@ -18,7 +18,7 @@ export function FAQ() {
           description="Everything you need to know about working with Selinyx. Can't find an answer? Reach out anytime."
         />
 
-        <div className="mx-auto mt-14 max-w-3xl space-y-3">
+        <div className="mx-auto mt-8 max-w-3xl space-y-3 md:mt-10 lg:mt-12">
           {faqs.map((faq, i) => {
             const open = openIndex === i;
             return (

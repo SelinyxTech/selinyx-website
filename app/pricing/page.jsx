@@ -28,7 +28,7 @@ export default function PricingPage() {
         description="Choose the engagement model that fits your stage. Every plan includes senior talent, transparent communication, and code you fully own."
       />
 
-      <section className="relative pb-20 md:pb-28">
+      <section className="relative pb-10 md:pb-14 lg:pb-16 2xl:pb-20">
         {/* Soft decorative glow behind the cards */}
         <div
           aria-hidden="true"

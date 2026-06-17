@@ -27,7 +27,7 @@ const steps = [
 
 export function Process() {
   return (
-    <section className="py-20 md:py-28">
+    <section className="py-10 md:py-14 lg:py-16 2xl:py-20">
       <div className="container-x">
         <SectionHeading
           eyebrow="How We Work"
@@ -35,7 +35,7 @@ export function Process() {
           description="A clear, collaborative process designed to reduce risk and ship value early."
         />
 
-        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-6 md:mt-10 md:grid-cols-2 lg:mt-12 lg:grid-cols-4">
           {steps.map((step, i) => (
             <Reveal key={step.title} delay={i * 0.08}>
               <div className="relative h-full rounded-2xl border border-ink-200/60 bg-white p-6 dark:border-white/10 dark:bg-white/[0.03]">

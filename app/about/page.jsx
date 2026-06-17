@@ -27,7 +27,7 @@ export default function AboutPage() {
       />
 
       {/* Vision & Mission */}
-      <section className="py-20 md:py-28">
+      <section className="py-10 md:py-14 lg:py-16 2xl:py-20">
         <div className="container-x grid gap-6 md:grid-cols-2">
           <Reveal>
             <div className="h-full rounded-3xl border border-ink-200/60 bg-white p-8 dark:border-white/10 dark:bg-white/[0.03]">
@@ -60,14 +60,14 @@ export default function AboutPage() {
       </section>
 
       {/* Why choose Selinyx */}
-      <section className="py-20 md:py-28">
+      <section className="py-10 md:py-14 lg:py-16 2xl:py-20">
         <div className="container-x">
           <SectionHeading
             eyebrow="Why Selinyx"
             title="Why teams choose us"
             description="We combine the speed of a startup with the rigor of an enterprise engineering team."
           />
-          <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-5 md:mt-10 lg:mt-12 sm:grid-cols-2 lg:grid-cols-4">
             {whyChoose.map((point, i) => (
               <Reveal key={point.title} delay={i * 0.08}>
                 <div className="h-full rounded-2xl border border-ink-200/60 bg-white p-6 dark:border-white/10 dark:bg-white/[0.03]">
@@ -88,14 +88,14 @@ export default function AboutPage() {
       <Stats />
 
       {/* Core values */}
-      <section className="py-20 md:py-28">
+      <section className="py-10 md:py-14 lg:py-16 2xl:py-20">
         <div className="container-x">
           <SectionHeading
             eyebrow="Core Values"
             title="The principles we build on"
             description="These values shape every decision we make and every line of code we ship."
           />
-          <div className="mt-14 grid gap-5 sm:grid-cols-2">
+          <div className="mt-8 grid gap-5 md:mt-10 lg:mt-12 sm:grid-cols-2">
             {coreValues.map((value, i) => (
               <Reveal key={value.title} delay={i * 0.08}>
                 <div className="flex h-full gap-5 rounded-2xl border border-ink-200/60 bg-white p-6 dark:border-white/10 dark:bg-white/[0.03]">

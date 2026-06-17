@@ -45,6 +45,8 @@ export function ContactForm() {
   const inputClass =
     "w-full rounded-xl border border-ink-200 bg-white px-4 py-3 text-sm text-ink-800 outline-none transition-colors placeholder:text-ink-400 focus:border-brand-400 dark:border-white/10 dark:bg-white/5 dark:text-white";
   const labelClass = "mb-1.5 block text-sm font-medium text-ink-700 dark:text-ink-200";
+  // Native dropdown popups can't use translucent backgrounds, so options need solid colors.
+  const optionClass = "bg-white text-ink-800 dark:bg-ink-900 dark:text-white";
 
   if (submitted) {
     return (
@@ -126,13 +128,13 @@ export function ContactForm() {
             Service of interest
           </label>
           <select id="service" value={form.service} onChange={update("service")} className={inputClass}>
-            <option value="">Select a service</option>
+            <option value="" className={optionClass}>Select a service</option>
             {services.map((s) => (
-              <option key={s.slug} value={s.title}>
+              <option key={s.slug} value={s.title} className={optionClass}>
                 {s.title}
               </option>
             ))}
-            <option value="Other">Something else</option>
+            <option value="Other" className={optionClass}>Something else</option>
           </select>
         </div>
       </div>

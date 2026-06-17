@@ -25,7 +25,7 @@ export default function PortfolioPage() {
         description="A look at the kinds of products our team designs and engineers. Detailed case studies coming soon — until then, see what we can build for you."
       />
 
-      <section className="pb-20 md:pb-28">
+      <section className="pb-10 md:pb-14 lg:pb-16 2xl:pb-20">
         <div className="container-x grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, i) => (
             <Reveal key={project.slug} delay={(i % 3) * 0.08} className="h-full">
