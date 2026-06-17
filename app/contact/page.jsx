@@ -48,7 +48,7 @@ export default function ContactPage() {
         description="Have a project, a question, or just want to explore what's possible? Drop us a line — we read every message."
       />
 
-      <section className="relative pb-20 md:pb-28">
+      <section className="relative pb-10 md:pb-14 lg:pb-16 2xl:pb-20">
         {/* Soft decorative glow behind the content */}
         <div
           aria-hidden="true"

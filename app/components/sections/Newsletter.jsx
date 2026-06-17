@@ -17,7 +17,7 @@ export function Newsletter() {
   };
 
   return (
-    <section className="py-12">
+    <section className="py-8 md:py-10 lg:py-12">
       <div className="container-x">
         <Reveal>
           <div className="relative overflow-hidden rounded-3xl border border-ink-200/60 bg-white p-8 dark:border-white/10 dark:bg-white/[0.03] sm:p-12">
